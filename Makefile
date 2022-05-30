@@ -6,7 +6,7 @@
 #    By: apigeon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/30 16:08:04 by apigeon           #+#    #+#              #
-#    Updated: 2022/05/30 16:09:12 by apigeon          ###   ########.fr        #
+#    Updated: 2022/05/30 22:44:01 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,9 @@ LIBFT		= $(LIBFT_DIR)/libft.a
 MLX			= $(MLX_DIR)/libmlx.a
 
 ### SOURCE FILES ###
-SRCS	= 	main.c
+SRCS	= 	main.c \
+			errors.c \
+			hooks.c
 
 ### OBJECTS ###
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
@@ -55,7 +57,7 @@ $(MLX):
 
 $(LIBFT):
 	@echo "$(GREEN)Creating libft lib file$(NOC)"
-	@make -C $(LIBFT_DIR)
+	@make addon -C $(LIBFT_DIR)
 
 $(NAME):	$(LIBFT) $(MLX) $(OBJ_DIR) $(OBJS)
 	$(CC) $(CFLAGS) $(LFLAGS) $(OBJS) $(LINKS) -o $(NAME)
@@ -65,7 +67,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(HEADER)/$(NAME).h
-	@$(CC) $(CFLAGS) -I$(HEADER) -I$(LIBFT_DIR) -I$(MLX_DIR) -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(HEADER) -I$(LIBFT_DIR)/$(HEADER) -I$(MLX_DIR) -c $< -o $@
 	@echo "$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(GREEN)[Done]$(NOC)"
 
 clean:

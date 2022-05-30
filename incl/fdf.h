@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/05/30 16:19:13 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/05/30 22:43:42 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,9 @@ typedef struct s_point
     int x;
     int y;
 }               t_point;
+
+
+int     error(char *message, int code);
+void    setup_hooks(t_mlx *mlx);
 
 #endif
