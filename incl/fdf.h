@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/05/30 22:43:42 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/05/31 12:32:15 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <stdlib.h>
 # include <math.h>
 # include <X11/X.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
 # include "libft.h"
 # include "mlx.h"
 
@@ -69,5 +73,6 @@ typedef struct s_point
 
 int     error(char *message, int code);
 void    setup_hooks(t_mlx *mlx);
+int     *parse_file(char *filename);
 
 #endif

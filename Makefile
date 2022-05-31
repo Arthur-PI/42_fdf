@@ -6,7 +6,7 @@
 #    By: apigeon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/30 16:08:04 by apigeon           #+#    #+#              #
-#    Updated: 2022/05/30 22:44:01 by apigeon          ###   ########.fr        #
+#    Updated: 2022/05/31 12:32:30 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ MLX			= $(MLX_DIR)/libmlx.a
 ### SOURCE FILES ###
 SRCS	= 	main.c \
 			errors.c \
-			hooks.c
+			hooks.c \
+			parse.c
 
 ### OBJECTS ###
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))

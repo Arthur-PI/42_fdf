@@ -6,12 +6,13 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:12:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/05/30 22:43:17 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/05/31 12:31:36 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/*
 static void	init_mlx(t_mlx *mlx)
 {
 	mlx->mlx = mlx_init();
@@ -21,6 +22,7 @@ static void	init_mlx(t_mlx *mlx)
 	if (!mlx->win)
 		exit(error("Can't create a new mlx window", 1));
 }
+*/
 
 static void	usage(char *name)
 {
@@ -30,12 +32,14 @@ static void	usage(char *name)
 
 int	main(int ac, char **av)
 {
-	t_mlx	mlx;
+	//t_mlx	mlx;
+	int	*map;
 
 	if (ac != 2)
 		usage(av[0]);
-	init_mlx(&mlx);
-	setup_hooks(&mlx);
-	mlx_loop(mlx.mlx);
+	map = parse_file(av[1]);
+	//init_mlx(&mlx);
+	//setup_hooks(&mlx);
+	//mlx_loop(mlx.mlx);
 	return (0);
 }
