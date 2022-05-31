@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 11:57:55 by apigeon           #+#    #+#             */
-/*   Updated: 2022/05/31 12:34:03 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/05/31 12:48:28 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	*parse_file(char *filename)
 	if (fd == -1)
 		exit(error("Error: can't open the file", 1));
 	size = 0;
+	lines = NULL;
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		ft_lstadd_back(&lines, ft_lstnew(line));
