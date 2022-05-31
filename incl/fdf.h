@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/05/31 12:32:15 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/05/31 15:45:27 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,15 @@ typedef struct s_point
     int y;
 }               t_point;
 
+typedef struct  s_map
+{
+    int **map;
+    int x_len;
+    int y_len;
+}               t_map;
 
 int     error(char *message, int code);
 void    setup_hooks(t_mlx *mlx);
-int     *parse_file(char *filename);
+t_map   *parse_file(char *filename);
 
 #endif

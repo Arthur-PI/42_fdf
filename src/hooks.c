@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 22:37:45 by apigeon           #+#    #+#             */
-/*   Updated: 2022/05/30 22:46:32 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/05/31 14:54:49 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	quit(t_mlx *mlx)
 	return (0);
 }
 
-static int key_hook(int keycode, t_mlx *mlx)
+static int	key_hook(int keycode, t_mlx *mlx)
 {
 	if (keycode == KEY_ESC)
 		quit(mlx);
