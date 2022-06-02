@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/05/31 15:45:27 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/02 20:21:31 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@
 # define WINDOW_HEIGHT 700
 # define WINDOW_WIDTH 1000
 # define WINDOW_TITLE "FDF"
+
+# define RED 0x00FF0000
+# define GREEN 0x0000FF00
+# define BLUE 0x000000FF
 
 # define ON_KEYDOWN 2
 # define ON_KEYUP 3
@@ -80,5 +84,7 @@ typedef struct  s_map
 int     error(char *message, int code);
 void    setup_hooks(t_mlx *mlx);
 t_map   *parse_file(char *filename);
+t_list	*read_file(char *filename);
+void	bresenham(t_img *img, t_point a, t_point b, int color);
 
 #endif

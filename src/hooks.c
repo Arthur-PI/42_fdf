@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 22:37:45 by apigeon           #+#    #+#             */
-/*   Updated: 2022/05/31 14:54:49 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/02 21:08:36 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	quit(t_mlx *mlx)
 {
 	mlx_loop_end(mlx->mlx);
-	mlx_destroy_window(mlx->mlx, mlx->win);
 	return (0);
 }
 

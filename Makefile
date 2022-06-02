@@ -6,7 +6,7 @@
 #    By: apigeon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/30 16:08:04 by apigeon           #+#    #+#              #
-#    Updated: 2022/05/31 16:06:30 by apigeon          ###   ########.fr        #
+#    Updated: 2022/06/02 21:09:54 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ LINKS	= -lft -lmlx -lX11 -lXext -lm
 
 ### EXECUTABLE ###
 NAME	= fdf
+MAP		= maps/42.fdf
 
 ### INCLUDES ###
 OBJ_DIR		= bin
@@ -33,7 +34,9 @@ MLX			= $(MLX_DIR)/libmlx.a
 SRCS	= 	main.c \
 			errors.c \
 			hooks.c \
-			parse.c
+			parse.c \
+			file.c \
+			draw.c
 
 ### OBJECTS ###
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
@@ -70,6 +73,12 @@ $(OBJ_DIR):
 $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(HEADER)/$(NAME).h
 	@$(CC) $(CFLAGS) -I$(HEADER) -I$(LIBFT_DIR)/$(HEADER) -I$(MLX_DIR) -c $< -o $@
 	@echo "$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(GREEN)[Done]$(NOC)"
+
+run: $(NAME)
+	@./fdf $(MAP)
+
+val: $(NAME)
+	@valgrind --track-origins=yes --leak-check=full ./fdf $(MAP)
 
 clean:
 	@echo "$(GREEN)Supressing libraries files$(NOC)"
