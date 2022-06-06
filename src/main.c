@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:12:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/02 21:27:20 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/06 11:40:02 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,11 @@ int	main(int ac, char **av)
 	img.img = mlx_new_image(mlx.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
-	//bresenham(&img, (t_point){100, 100}, (t_point){200, 200}, RED);
-	//mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
+	draw_line(&img, (t_point){0, 0}, (t_point){WINDOW_WIDTH, WINDOW_HEIGHT}, RED);
+	draw_line(&img, (t_point){0, WINDOW_HEIGHT}, (t_point){WINDOW_WIDTH, 0}, RED);
+	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
 	mlx_loop(mlx.mlx);
+
 	mlx_destroy_image(mlx.mlx, img.img);
 	mlx_destroy_window(mlx.mlx, mlx.win);
 	mlx_destroy_display(mlx.mlx);

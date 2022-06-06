@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/02 20:21:31 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/06 11:51:41 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int     error(char *message, int code);
 void    setup_hooks(t_mlx *mlx);
 t_map   *parse_file(char *filename);
 t_list	*read_file(char *filename);
-void	bresenham(t_img *img, t_point a, t_point b, int color);
+void	draw_line(t_img *img, t_point a, t_point b, int color);
+
 
 #endif
