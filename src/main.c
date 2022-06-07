@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:12:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/06 11:40:02 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/07 20:18:02 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static void	init_mlx(t_mlx *mlx, t_map **map)
 		free_map(map);
 		exit(error("Can't initialize the mlx instance", 1));
 	}
-	mlx->win = mlx_new_window(mlx->mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
-			WINDOW_TITLE);
+	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
 	if (!mlx->win)
 	{
 		free_map(map);
@@ -49,6 +48,7 @@ static void	usage(char *name)
 	exit(1);
 }
 
+// The mlx, the window and the image malloc 232 times
 int	main(int ac, char **av)
 {
 	t_mlx	mlx;
@@ -62,17 +62,19 @@ int	main(int ac, char **av)
 		exit(error("Error: an error occured while parsing the map", 1));
 	init_mlx(&mlx, &map);
 	setup_hooks(&mlx);
-	img.img = mlx_new_image(mlx.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	img.img = mlx_new_image(mlx.mlx, WIN_WIDTH, WIN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
-	draw_line(&img, (t_point){0, 0}, (t_point){WINDOW_WIDTH, WINDOW_HEIGHT}, RED);
-	draw_line(&img, (t_point){0, WINDOW_HEIGHT}, (t_point){WINDOW_WIDTH, 0}, RED);
+	draw_line(&img, (t_point){0, 0}, (t_point){WIN_WIDTH, WIN_HEIGHT}, RED);
+	draw_line(&img, (t_point){100, 100}, (t_point){200, 200}, RED);
+	draw_line(&img, (t_point){0, WIN_HEIGHT}, (t_point){WIN_WIDTH, 0}, RED);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
 	mlx_loop(mlx.mlx);
 
 	mlx_destroy_image(mlx.mlx, img.img);
 	mlx_destroy_window(mlx.mlx, mlx.win);
 	mlx_destroy_display(mlx.mlx);
+	free(mlx.mlx);
 	free_map(&map);
 	return (0);
 }

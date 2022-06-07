@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/06 11:51:41 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/07 20:15:16 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,23 @@
 
 # include <stdio.h>
 
-# define WINDOW_HEIGHT 700
-# define WINDOW_WIDTH 1000
-# define WINDOW_TITLE "FDF"
+# define WIN_HEIGHT	700
+# define WIN_WIDTH	1000
+# define WIN_TITLE	"FDF"
 
-# define RED 0x00FF0000
-# define GREEN 0x0000FF00
-# define BLUE 0x000000FF
+# define ABS(X) (((X) < 0) ? (-(X)) : (X))
 
-# define ON_KEYDOWN 2
-# define ON_KEYUP 3
-# define ON_MOUSEDOWN 4
-# define ON_MOUSEUP 5
-# define ON_MOUSEMOVE 6
-# define ON_EXPOSE 12
-# define ON_DESTROY 17
+# define RED	0x00FF0000
+# define GREEN	0x0000FF00
+# define BLUE	0x000000FF
+
+# define ON_KEYDOWN		2
+# define ON_KEYUP		3
+# define ON_MOUSEDOWN	4
+# define ON_MOUSEUP		5
+# define ON_MOUSEMOVE	6
+# define ON_EXPOSE		12
+# define ON_DESTROY		17
 
 # define KEY_ESC 65307
 
