@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:12:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/07 20:18:02 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/07 21:21:29 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ int	main(int ac, char **av)
 	img.img = mlx_new_image(mlx.mlx, WIN_WIDTH, WIN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
-	draw_line(&img, (t_point){0, 0}, (t_point){WIN_WIDTH, WIN_HEIGHT}, RED);
-	draw_line(&img, (t_point){100, 100}, (t_point){200, 200}, RED);
-	draw_line(&img, (t_point){0, WIN_HEIGHT}, (t_point){WIN_WIDTH, 0}, RED);
+	draw_line(&img, (t_point){0, 0, BLUE}, (t_point){WIN_WIDTH, WIN_HEIGHT, BLUE});
+	draw_line(&img, (t_point){0, 0, RED}, (t_point){1, WIN_HEIGHT, RED});
+	draw_line(&img, (t_point){0, WIN_HEIGHT, GREEN}, (t_point){WIN_WIDTH, 0, GREEN});
 	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
 	mlx_loop(mlx.mlx);
 

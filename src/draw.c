@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:59:21 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/07 20:36:06 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/07 21:13:36 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,88 +15,52 @@
 static void	img_pixel_put(t_img *img, int x, int y, int color)
 {
 	int		offset;
-	//char	*dst;
 
 	if (x >= 0 && x < WIN_WIDTH && y > 0 && y < WIN_HEIGHT)
 	{
 		offset = (y * img->line_length + (x * img->bits_per_pixel / 8));
-		//dst = img->addr + offset;
 		img->addr[offset] = color;
 		img->addr[++offset] = color >> 8;
 		img->addr[++offset] = color >> 16;
 	}
 }
 
-// (0,700) (1000,0)
-// dx = 1000
-// dy = -700
-static void	bresenham_up(t_img *img, t_point a, t_point b, int color)
+static void	bresenham(t_img *img, t_point a, t_point b, int sign)
 {
-	int	x;
-	int	y;
-	int	dx;
-	int	dy;
-	int	p;
+	int		dx;
+	int		dy;
+	int		p;
+	t_point	pos;
 
-	dx = b.x - a.x;
-	dy = a.y - b.y;
-	p = 2 * (dy - dx);
-	x = a.x;
-	y = a.y;
-	while (x < b.x && y > b.y)
+	dx = ABS(b.x - a.x);
+	dy = ABS(b.y - a.y);
+	p = (dy - dx);
+	pos.x = a.x;
+	pos.y = a.y;
+	while (pos.x != b.x && pos.y != b.y)
 	{
-		img_pixel_put(img, x, y, color);
-		printf("(%d,%d)\n", x, y);
+		img_pixel_put(img, pos.x, pos.y, (a.color + b.color) / 2);
 		if (p <= 0)
 		{
-			p += 2 * dy;
-			x++;
+			p += dy;
+			pos.x++;
 		}
 		if (p >= 0)
 		{
-			p -= 2 * dx;
-			y--;
+			p -= dx;
+			pos.y += sign;
 		}
 	}
 }
 
-static void	bresenham_down(t_img *img, t_point a, t_point b, int color)
-{
-	int	x;
-	int	y;
-	int	dx;
-	int	dy;
-	int	p;
-
-	dx = b.x - a.x;
-	dy = b.y - a.y;
-	p = 2 * (dy - dx);
-	x = a.x;
-	y = a.y;
-	while (x < b.x && y < b.y)
-	{
-		img_pixel_put(img, x, y, color);
-		if (p <= 0)
-		{
-			p += 2 * dy;
-			x++;
-		}
-		if (p >= 0)
-		{
-			p -= 2 * dx;
-			y++;
-		}
-	}
-}
-
-void	draw_line(t_img *img, t_point a, t_point b, int color)
+void	draw_line(t_img *img, t_point a, t_point b)
 {
 	if (a.x < b.x && a.y < b.y)
-		bresenham_down(img, a, b, color);
+		bresenham(img, a, b, DOWN);
 	else if (a.x > b.x && a.y > b.y)
-		bresenham_down(img, b, a, color);
+		bresenham(img, b, a, DOWN);
 	else if (a.x < b.x && a.y > b.y)
-		bresenham_up(img, a, b, color);
+		bresenham(img, a, b, UP);
 	else if (a.x > b.x && a.y < b.y)
-		bresenham_up(img, b, a, color);
+		bresenham(img, b, a, UP);
 }
