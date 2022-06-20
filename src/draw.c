@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:59:21 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/20 15:49:46 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/20 17:07:40 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	img_pixel_put(t_img *img, int x, int y, int color)
 {
 	int		offset;
 
-	if (x >= 0 && x < WIN_WIDTH && y > 0 && y < WIN_HEIGHT)
+	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
 	{
 		offset = (y * img->line_length + (x * img->bits_per_pixel / 8));
 		img->addr[offset] = color;

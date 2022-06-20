@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:12:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/20 16:22:36 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/20 17:08:00 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void	usage(char *name)
 	exit(1);
 }
 
+/*
 static void	test_lines(t_img *img)
 {
 	int		i;
@@ -79,6 +80,51 @@ static void	test_lines(t_img *img)
 		i += 5;
 	}
 }
+*/
+
+static void	print_map(t_map *map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < map->y_len)
+	{
+		x = 0;
+		while (x < map->x_len)
+		{
+			printf("%3d", map->map[y][x]);
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
+}
+
+static void	draw_map(t_img *img, t_map *map)
+{
+	int	x;
+	int	y;
+	int	offset_x;
+	int	offset_y;
+
+	y = 0;
+	offset_x = WIN_WIDTH / map->x_len;
+	offset_y = WIN_HEIGHT / map->y_len;
+	while (y < map->y_len)
+	{
+		x = 0;
+		while (x < map->x_len)
+		{
+			if (x != map->x_len - 1)
+				draw_line(img, (t_point){x * offset_x, y * offset_y, RED}, (t_point){(x + 1) * offset_x, y * offset_y, RED});
+			if (y != map->y_len - 1)
+				draw_line(img, (t_point){x * offset_x, y * offset_y, RED}, (t_point){x * offset_x, (y + 1) * offset_y, RED});
+			x++;
+		}
+		y++;
+	}
+}
 
 // The mlx, the window and the image malloc 232 times
 int	main(int ac, char **av)
@@ -90,6 +136,8 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		usage(av[0]);
 	map = parse_file(av[1]);
+	print_map(map);
+	printf("%d\n", 3 / 2);
 	if (!map)
 		exit(error("Error: an error occured while parsing the map", 1));
 	init_mlx(&mlx, &map);
@@ -97,7 +145,8 @@ int	main(int ac, char **av)
 	img.img = mlx_new_image(mlx.mlx, WIN_WIDTH, WIN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
-	test_lines(&img);
+	//test_lines(&img);
+	draw_map(&img, map);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
 	mlx_loop(mlx.mlx);
 	mlx_destroy_image(mlx.mlx, img.img);
