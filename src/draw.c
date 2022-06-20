@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:59:21 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/07 21:13:36 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/20 15:49:46 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,42 +25,44 @@ static void	img_pixel_put(t_img *img, int x, int y, int color)
 	}
 }
 
-static void	bresenham(t_img *img, t_point a, t_point b, int sign)
+static void	bresenham(t_img *img, t_point a, t_point b, int *signs)
 {
-	int		dx;
-	int		dy;
-	int		p;
-	t_point	pos;
+	int	dx;
+	int	dy;
+	int	p;
+	int	p2;
 
 	dx = ABS(b.x - a.x);
-	dy = ABS(b.y - a.y);
-	p = (dy - dx);
-	pos.x = a.x;
-	pos.y = a.y;
-	while (pos.x != b.x && pos.y != b.y)
+	dy = -ABS(b.y - a.y);
+	p = dx + dy;
+	while (1)
 	{
-		img_pixel_put(img, pos.x, pos.y, (a.color + b.color) / 2);
-		if (p <= 0)
+		img_pixel_put(img, a.x, a.y, (a.color + b.color) / 2);
+		if (a.x == b.x && a.y == b.y)
+			break ;
+		p2 = 2 * p;
+		if (p2 >= dy)
 		{
 			p += dy;
-			pos.x++;
+			a.x += signs[0];
 		}
-		if (p >= 0)
+		if (p2 <= dx)
 		{
-			p -= dx;
-			pos.y += sign;
+			p += dx;
+			a.y += signs[1];
 		}
 	}
 }
 
 void	draw_line(t_img *img, t_point a, t_point b)
 {
-	if (a.x < b.x && a.y < b.y)
-		bresenham(img, a, b, DOWN);
-	else if (a.x > b.x && a.y > b.y)
-		bresenham(img, b, a, DOWN);
-	else if (a.x < b.x && a.y > b.y)
-		bresenham(img, a, b, UP);
-	else if (a.x > b.x && a.y < b.y)
-		bresenham(img, b, a, UP);
+	int	signs[2];
+
+	signs[0] = UP;
+	signs[1] = UP;
+	if (a.x > b.x)
+		signs[0] = DOWN;
+	if (a.y > b.y)
+		signs[1] = DOWN;
+	bresenham(img, a, b, signs);
 }

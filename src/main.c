@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:12:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/07 21:21:29 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/20 16:22:36 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,38 @@ static void	usage(char *name)
 	exit(1);
 }
 
+static void	test_lines(t_img *img)
+{
+	int		i;
+	t_point	a;
+	t_point	b;
+
+	a.x = 500;
+	a.y = 350;
+	a.color = RED;
+	b.color = RED;
+	i = 0;
+	while (i <= WIN_WIDTH)
+	{
+		b.x = i;
+		b.y = 0;
+		draw_line(img, a, b);
+		b.y = WIN_HEIGHT;
+		draw_line(img, a, b);
+		i += 5;
+	}
+	i = 0;
+	while (i <= WIN_HEIGHT)
+	{
+		b.x = 0;
+		b.y = i;
+		draw_line(img, a, b);
+		b.x = WIN_WIDTH;
+		draw_line(img, a, b);
+		i += 5;
+	}
+}
+
 // The mlx, the window and the image malloc 232 times
 int	main(int ac, char **av)
 {
@@ -65,12 +97,9 @@ int	main(int ac, char **av)
 	img.img = mlx_new_image(mlx.mlx, WIN_WIDTH, WIN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
-	draw_line(&img, (t_point){0, 0, BLUE}, (t_point){WIN_WIDTH, WIN_HEIGHT, BLUE});
-	draw_line(&img, (t_point){0, 0, RED}, (t_point){1, WIN_HEIGHT, RED});
-	draw_line(&img, (t_point){0, WIN_HEIGHT, GREEN}, (t_point){WIN_WIDTH, 0, GREEN});
+	test_lines(&img);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);
 	mlx_loop(mlx.mlx);
-
 	mlx_destroy_image(mlx.mlx, img.img);
 	mlx_destroy_window(mlx.mlx, mlx.win);
 	mlx_destroy_display(mlx.mlx);

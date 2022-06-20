@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/07 21:11:14 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/20 17:06:30 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 # define GREEN 0x0000FF00
 # define BLUE 0x000000FF
 
-#define UP -1
-#define DOWN 1
+#define UP 1
+#define DOWN -1
 
 # define ON_KEYDOWN 2
 # define ON_KEYUP 3
