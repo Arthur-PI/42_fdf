@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:12:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/20 17:08:00 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/21 07:58:40 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ static void	init_mlx(t_mlx *mlx, t_map **map)
 		free_map(map);
 		exit(error("Can't create an mlx window", 1));
 	}
+	if (WIN_WIDTH / (*map)->x_len > WIN_HEIGHT / (*map)->y_len)
+		(*map)->offset = WIN_HEIGHT / (*map)->y_len;
+	else
+		(*map)->offset = WIN_WIDTH / (*map)->x_len;
 }
 
 static void	usage(char *name)
@@ -105,21 +109,17 @@ static void	draw_map(t_img *img, t_map *map)
 {
 	int	x;
 	int	y;
-	int	offset_x;
-	int	offset_y;
 
 	y = 0;
-	offset_x = WIN_WIDTH / map->x_len;
-	offset_y = WIN_HEIGHT / map->y_len;
 	while (y < map->y_len)
 	{
 		x = 0;
 		while (x < map->x_len)
 		{
 			if (x != map->x_len - 1)
-				draw_line(img, (t_point){x * offset_x, y * offset_y, RED}, (t_point){(x + 1) * offset_x, y * offset_y, RED});
+				draw_line(img, (t_point){x * map->offset, y * map->offset, RED}, (t_point){(x + 1) * map->offset, y * map->offset, RED});
 			if (y != map->y_len - 1)
-				draw_line(img, (t_point){x * offset_x, y * offset_y, RED}, (t_point){x * offset_x, (y + 1) * offset_y, RED});
+				draw_line(img, (t_point){x * map->offset, y * map->offset, RED}, (t_point){x * map->offset, (y + 1) * map->offset, RED});
 			x++;
 		}
 		y++;
@@ -137,7 +137,6 @@ int	main(int ac, char **av)
 		usage(av[0]);
 	map = parse_file(av[1]);
 	print_map(map);
-	printf("%d\n", 3 / 2);
 	if (!map)
 		exit(error("Error: an error occured while parsing the map", 1));
 	init_mlx(&mlx, &map);

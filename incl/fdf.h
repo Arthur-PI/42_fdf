@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/20 17:06:30 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/21 07:53:49 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 # include <stdio.h>
 
-# define WIN_HEIGHT 700
-# define WIN_WIDTH 1000
+# define WIN_HEIGHT 900
+# define WIN_WIDTH 1200
 # define WIN_TITLE "FDF"
 
 # define ABS(X) (((X) < 0) ? (-(X)) : (X))
@@ -85,6 +85,7 @@ typedef struct  s_map
     int **map;
     int x_len;
     int y_len;
+	int	offset;
 }               t_map;
 
 int     error(char *message, int code);
