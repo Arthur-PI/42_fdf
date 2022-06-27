@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:12:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/21 07:58:40 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/27 16:03:17 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ static void	draw_map(t_img *img, t_map *map)
 		while (x < map->x_len)
 		{
 			if (x != map->x_len - 1)
-				draw_line(img, (t_point){x * map->offset, y * map->offset, RED}, (t_point){(x + 1) * map->offset, y * map->offset, RED});
+				draw_line(img, (t_point){x, y, RED}, (t_point){x + 1, y, RED});
 			if (y != map->y_len - 1)
-				draw_line(img, (t_point){x * map->offset, y * map->offset, RED}, (t_point){x * map->offset, (y + 1) * map->offset, RED});
+				draw_line(img, (t_point){x, y, RED}, (t_point){x, y + 1, RED});
 			x++;
 		}
 		y++;
@@ -144,6 +144,7 @@ int	main(int ac, char **av)
 	img.img = mlx_new_image(mlx.mlx, WIN_WIDTH, WIN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
+	img.offset = map->offset;
 	//test_lines(&img);
 	draw_map(&img, map);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, img.img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:59:21 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/20 17:07:40 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/27 16:00:01 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	img_pixel_put(t_img *img, int x, int y, int color)
 {
 	int		offset;
 
+	x += WIN_WIDTH / 2;
+	y += WIN_HEIGHT / 2;
 	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
 	{
 		offset = (y * img->line_length + (x * img->bits_per_pixel / 8));
@@ -64,5 +66,9 @@ void	draw_line(t_img *img, t_point a, t_point b)
 		signs[0] = DOWN;
 	if (a.y > b.y)
 		signs[1] = DOWN;
+	a.x *= img->offset;
+	a.y *= img->offset;
+	b.x *= img->offset;
+	b.y *= img->offset;
 	bresenham(img, a, b, signs);
 }

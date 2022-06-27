@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/21 07:53:49 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/27 16:23:37 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 # include <stdio.h>
 
-# define WIN_HEIGHT 900
-# define WIN_WIDTH 1200
+# define WIN_HEIGHT 1200
+# define WIN_WIDTH 1500
 # define WIN_TITLE "FDF"
 
 # define ABS(X) (((X) < 0) ? (-(X)) : (X))
@@ -64,6 +64,7 @@ typedef struct s_img
     int     bits_per_pixel;
     int     line_length;
     int     endian;
+    int     offset;
 }               t_img;
 
 typedef struct s_mlx
@@ -77,6 +78,7 @@ typedef struct s_point
 {
     int x;
     int y;
+    int z;
 	int	color;
 }               t_point;
 
