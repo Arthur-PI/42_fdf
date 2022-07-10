@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/27 16:23:37 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/28 14:48:19 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 
 # include <stdio.h>
 
-# define WIN_HEIGHT 1200
-# define WIN_WIDTH 1500
+# define WIN_HEIGHT 900
+# define WIN_WIDTH 1200
 # define WIN_TITLE "FDF"
 
 # define ABS(X) (((X) < 0) ? (-(X)) : (X))

@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:12:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/27 16:03:17 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/06/28 14:47:57 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ static void	draw_map(t_img *img, t_map *map)
 {
 	int	x;
 	int	y;
+	int	z;
 
 	y = 0;
 	while (y < map->y_len)
@@ -116,10 +117,11 @@ static void	draw_map(t_img *img, t_map *map)
 		x = 0;
 		while (x < map->x_len)
 		{
+			z = map->map[y][x];
 			if (x != map->x_len - 1)
-				draw_line(img, (t_point){x, y, RED}, (t_point){x + 1, y, RED});
+				draw_line(img, (t_point){x, y, z, RED}, (t_point){x + 1, y, z, RED});
 			if (y != map->y_len - 1)
-				draw_line(img, (t_point){x, y, RED}, (t_point){x, y + 1, RED});
+				draw_line(img, (t_point){x, y, z, RED}, (t_point){x, y + 1, z, RED});
 			x++;
 		}
 		y++;
