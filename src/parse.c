@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 11:57:55 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/02 21:25:08 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/10 11:41:44 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ static int	fill_map(t_map *map, t_list *lines)
 			return (emergency_fill_problem(map));
 		lines = lines->next;
 		x = 0;
-		map->map[y] = malloc(map->x_len * sizeof(int));
+		map->map[y] = malloc(map->x_len * sizeof(*map->map[y]));
 		if (!map->map[y])
 			return (emergency_fill_problem(map));
 		while (x < map->x_len)
 		{
-			map->map[y][x] = ft_atoi(numbers_char[x]);
+			map->map[y][x] = get_point(x, y, ft_atoi(numbers_char[x]), BLUE);
 			free(numbers_char[x]);
 			x++;
 		}
