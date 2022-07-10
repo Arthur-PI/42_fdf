@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:54:46 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/10 19:01:50 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/10 22:31:24 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@
 
 # define TRANSLATION_SPEED 10
 # define ZOOM_SPEED 0.05
-# define ROTATION_SPEED M_PI_4 / 10
+# define ROTATION_SPEED M_PI_4 / 10.0
 
 #endif

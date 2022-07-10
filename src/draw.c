@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:59:21 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/10 17:04:35 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/10 22:58:48 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	bresenham(t_img *img, t_point a, t_point b, int *signs)
 	p = dx + dy;
 	while (1)
 	{
-		img_pixel_put(img, a.x, a.y, (a.color + b.color) / 2);
+		img_pixel_put(img, a.x, a.y, a.color);
 		if (a.x == b.x && a.y == b.y)
 			break ;
 		p2 = 2 * p;
@@ -60,7 +60,7 @@ void	offset(t_point *p, int offset)
 {
 	p->x = p->x * offset - WIN_WIDTH / 2;
 	p->y = p->y * offset - WIN_HEIGHT / 2;
-	p->z = p->z * offset;
+	p->z = p->z * 10;
 }
 
 void	apply_zoom(t_point *p, double zoom)
@@ -74,6 +74,32 @@ void	translate(t_point *p, t_translate trans)
 {
 	p->x += trans.tx;
 	p->y += trans.ty;
+}
+
+int	get_r(int color)
+{
+	return ((color >> 16) & 0xFF);
+}
+
+int	get_g(int color)
+{
+	return ((color >> 8) & 0xFF);
+}
+
+int	get_b(int color)
+{
+	return (color & 0xFF);
+}
+
+int	blend_colors(int c1, int c2)
+{
+	int cnew;
+
+	cnew = 0;
+	cnew = ((get_r(c1) + get_r(c2)) / 2) << 8;
+	cnew = (cnew + ((get_g(c1) + get_g(c2)) / 2)) << 8;
+	cnew += (get_b(c1) + get_b(c2)) / 2;
+	return (cnew);
 }
 
 void	draw_line(t_mlx *mlx, t_point x1, t_point x2)
@@ -98,5 +124,6 @@ void	draw_line(t_mlx *mlx, t_point x1, t_point x2)
 		signs[0] = DOWN;
 	if (a.y > b.y)
 		signs[1] = DOWN;
+	a.color = blend_colors(a.color, b.color);
 	bresenham(mlx->img, a, b, signs);
 }

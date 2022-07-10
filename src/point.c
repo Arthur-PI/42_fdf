@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 11:39:15 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/10 15:18:40 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/10 22:37:49 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,14 @@ t_point	get_point(int x, int y, int z, int color)
 {
 	t_point	point;
 
+	(void)color;
 	point.x = x;
 	point.y = y;
 	point.z = z;
-	point.color = color;
+	if (z > 5)
+		point.color = RED;
+	else
+		point.color = BLUE;
 	return (point);
 }
 
