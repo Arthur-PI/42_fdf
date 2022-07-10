@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:59:21 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/10 15:39:05 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/10 17:04:35 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	translate(t_point *p, t_translate trans)
 	p->y += trans.ty;
 }
 
-void	draw_line(t_img *img, t_point x1, t_point x2, t_rotation rot, t_translate trans, double zoom)
+void	draw_line(t_mlx *mlx, t_point x1, t_point x2)
 {
 	int	signs[2];
 	t_point	a;
@@ -84,19 +84,19 @@ void	draw_line(t_img *img, t_point x1, t_point x2, t_rotation rot, t_translate t
 
 	a = copy_point(x1);
 	b = copy_point(x2);
-	offset(&a, img->offset);
-	offset(&b, img->offset);
-	rotate_point(&a, rot);
-	rotate_point(&b, rot);
-	apply_zoom(&a, zoom);
-	apply_zoom(&b, zoom);
-	translate(&a, trans);
-	translate(&b, trans);
+	offset(&a, mlx->img->offset);
+	offset(&b, mlx->img->offset);
+	rotate_point(&a, mlx->map->rot);
+	rotate_point(&b, mlx->map->rot);
+	apply_zoom(&a, mlx->map->zoom);
+	apply_zoom(&b, mlx->map->zoom);
+	translate(&a, mlx->map->trans);
+	translate(&b, mlx->map->trans);
 	signs[0] = UP;
 	signs[1] = UP;
 	if (a.x > b.x)
 		signs[0] = DOWN;
 	if (a.y > b.y)
 		signs[1] = DOWN;
-	bresenham(img, a, b, signs);
+	bresenham(mlx->img, a, b, signs);
 }

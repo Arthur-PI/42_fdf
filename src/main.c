@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:12:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/10 16:03:00 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/10 17:02:30 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ static void	init_mlx(t_mlx *mlx)
 	mlx->map->zoom = 1;
 	mlx->map->trans.tx = 0;
 	mlx->map->trans.ty = 0;
+	mlx->map->rot.rx = 0;
+	mlx->map->rot.ry = 0;
+	mlx->map->rot.rz = 0;
 	if (WIN_WIDTH / mlx->map->x_len > WIN_HEIGHT / mlx->map->y_len)
 		mlx->map->offset = WIN_HEIGHT / mlx->map->y_len;
 	else
@@ -54,40 +57,6 @@ static void	usage(char *name)
 	ft_printf("Usage: %s [file.fdf]\n", name);
 	exit(1);
 }
-
-/*
-static void	test_lines(t_img *img)
-{
-	int		i;
-	t_point	a;
-	t_point	b;
-
-	a.x = 500;
-	a.y = 350;
-	a.color = RED;
-	b.color = RED;
-	i = 0;
-	while (i <= WIN_WIDTH)
-	{
-		b.x = i;
-		b.y = 0;
-		draw_line(img, a, b);
-		b.y = WIN_HEIGHT;
-		draw_line(img, a, b);
-		i += 5;
-	}
-	i = 0;
-	while (i <= WIN_HEIGHT)
-	{
-		b.x = 0;
-		b.y = i;
-		draw_line(img, a, b);
-		b.x = WIN_WIDTH;
-		draw_line(img, a, b);
-		i += 5;
-	}
-}
-*/
 
 static void	print_map(t_map *map)
 {
@@ -112,21 +81,19 @@ void	draw_map(t_mlx *mlx)
 {
 	int			x;
 	int			y;
-	t_rotation	rot;
+	t_point		**map;
 
 	y = 0;
-	rot.rx = 0;
-	rot.ry = M_PI_2;
-	rot.rz = M_PI_4;
+	map = mlx->map->map;
 	while (y < mlx->map->y_len)
 	{
 		x = 0;
 		while (x < mlx->map->x_len)
 		{
 			if (x != mlx->map->x_len - 1)
-				draw_line(mlx->img, mlx->map->map[y][x], mlx->map->map[y][x + 1], rot, mlx->map->trans, mlx->map->zoom);
+				draw_line(mlx, map[y][x], map[y][x + 1]);
 			if (y != mlx->map->y_len - 1)
-				draw_line(mlx->img, mlx->map->map[y][x], mlx->map->map[y + 1][x], rot, mlx->map->trans, mlx->map->zoom);
+				draw_line(mlx, map[y][x], map[y + 1][x]);
 			x++;
 		}
 		y++;
