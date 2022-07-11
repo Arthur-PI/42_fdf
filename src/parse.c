@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 11:57:55 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/10 22:34:37 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/11 14:12:07 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,10 @@ static int	fill_map(t_map *map, t_list *lines)
 		numbers_char = ft_split(lines->content, ' ');
 		if (!numbers_char)
 			return (emergency_fill_problem(map));
-		lines = lines->next;
-		x = 0;
 		map->map[y] = malloc(map->x_len * sizeof(*map->map[y]));
 		if (!map->map[y])
 			return (emergency_fill_problem(map));
+		x = 0;
 		while (x < map->x_len)
 		{
 			map->map[y][x] = get_point(x, y, ft_atoi(numbers_char[x]), BLUE);
@@ -82,6 +81,7 @@ static int	fill_map(t_map *map, t_list *lines)
 			x++;
 		}
 		free(numbers_char);
+		lines = lines->next;
 		y++;
 	}
 	return (1);
@@ -93,6 +93,7 @@ t_map	*parse_file(char *filename)
 	t_map	*map;
 
 	lines = read_file(filename);
+	printf("File read\n");
 	map = malloc(sizeof(*map));
 	if (!map)
 	{
@@ -108,8 +109,10 @@ t_map	*parse_file(char *filename)
 		ft_lstclear(&lines, &free);
 		exit(error("Error: Malloc allocation error during parsing", 1));
 	}
+	printf("Map malloc\n");
 	if (fill_map(map, lines) != 1)
 		return (NULL);
+	printf("Map filled\n");
 	ft_lstclear(&lines, &free);
 	ft_printf("Parsing done\n");
 	return (map);

@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:41:54 by apigeon           #+#    #+#             */
-/*   Updated: 2022/06/02 21:16:55 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/11 13:59:44 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ t_list	*read_file(char *filename)
 {
 	int		fd;
 	char	*line;
-	t_list	*lines;
-	t_list	*tmp;
+	t_list	*start;
+	t_list	*current;
 
 	valid_filename(filename);
 	fd = open(filename, O_RDONLY);
@@ -45,16 +45,18 @@ t_list	*read_file(char *filename)
 		close(fd);
 		exit(error("Error: can't open or read the file", 1));
 	}
-	lines = NULL;
-	line = get_next_line(fd);
-	while (line != NULL)
+	current = ft_lstnew(get_next_line(fd));
+	start = current;
+	while (current && current->content != NULL)
 	{
-		tmp = ft_lstnew(line);
-		if (!tmp)
-			emergency_read_exit(&lines, fd);
-		ft_lstadd_back(&lines, tmp);
 		line = get_next_line(fd);
+		if (!line)
+			break ;
+		ft_lstadd_back(&current, ft_lstnew(line));
+		if (!current->next)
+			emergency_read_exit(&start, fd);
+		current = current->next;
 	}
 	close(fd);
-	return (lines);
+	return (start);
 }

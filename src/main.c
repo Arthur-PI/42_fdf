@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:12:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/10 17:02:30 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/11 12:11:47 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	usage(char *name)
 	exit(1);
 }
 
+/*
 static void	print_map(t_map *map)
 {
 	int	x;
@@ -76,6 +77,7 @@ static void	print_map(t_map *map)
 		y++;
 	}
 }
+*/
 
 void	draw_map(t_mlx *mlx)
 {
@@ -130,7 +132,6 @@ int	main(int ac, char **av)
 	mlx.map = parse_file(av[1]);
 	if (!mlx.map)
 		exit(error("Error: an error occured while parsing the map", 1));
-	print_map(mlx.map);
 	init_mlx(&mlx);
 	img = get_image(&mlx);
 	mlx.img = &img;

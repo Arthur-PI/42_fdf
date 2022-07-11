@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/10 19:02:44 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/11 14:10:00 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "constant.h"
 
 # include <stdio.h>
+# include <string.h>
 
 # define ABS(X) (((X) < 0) ? (-(X)) : (X))
 
