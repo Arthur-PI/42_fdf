@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/11 14:10:00 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/11 19:05:07 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,36 +39,20 @@ typedef struct s_img
     int     offset;
 }               t_img;
 
-typedef struct  s_translate
-{
-    int tx;
-    int ty;
-}               t_translate;
-
 typedef struct s_point
 {
-    int x;
-    int y;
-    int z;
+    double x;
+    double y;
+    double z;
 	int	color;
 }               t_point;
 
-typedef struct  s_rotation
-{
-    double  rx;
-    double  ry;
-    double  rz;
-}               t_rotation;
-
 typedef struct  s_map
 {
-    t_point **map;
-    int     x_len;
-    int     y_len;
-	int	    offset;
-    double      zoom;
-    t_rotation  rot;
-    t_translate trans;
+    int         x_len;
+    int         y_len;
+	double	    offset;
+    t_point     **map;
 }               t_map;
 
 typedef struct s_mlx
@@ -86,8 +70,18 @@ t_list	*read_file(char *filename);
 void	draw_line(t_mlx *mlx, t_point a, t_point b);
 t_point get_point(int x, int y, int z, int color);
 t_point copy_point(t_point p);
-void    rotate_point(t_point *p, t_rotation rot);
 void    draw_map(t_mlx *mlx);
 t_img   get_image(t_mlx *mlx);
+t_point get_map_point(t_point p, double offset);
+void	foreach_point(t_map *map, double val, void (*f)(t_point *, double));
+void	translate_x(t_point *p, double tx);
+void	translate_y(t_point *p, double ty);
+void	rotate_x(t_point *p, double rx);
+void	rotate_y(t_point *p, double ry);
+void	rotate_z(t_point *p, double rz);
+void    zoom(t_point *p, double coef);
+int     blend_colors(int c1, int c2);
+void    print_map(t_map *map);
+void    render(t_mlx *mlx);
 
 #endif

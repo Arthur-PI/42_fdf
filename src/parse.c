@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 11:57:55 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/11 14:12:07 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/11 17:42:33 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,18 @@ static int	emergency_fill_problem(t_map *map)
 	return (-1);
 }
 
+int	get_color(int z)
+{
+	if (z > 5)
+		return (RED);
+	return (BLUE);
+}
+
 static int	fill_map(t_map *map, t_list *lines)
 {
 	int		x;
 	int		y;
+	int		z;
 	char	**numbers_char;
 
 	y = 0;
@@ -76,7 +84,8 @@ static int	fill_map(t_map *map, t_list *lines)
 		x = 0;
 		while (x < map->x_len)
 		{
-			map->map[y][x] = get_point(x, y, ft_atoi(numbers_char[x]), BLUE);
+			z = ft_atoi(numbers_char[x]);
+			map->map[y][x] = get_map_point(get_point(x, y, z, get_color(z)), map->offset);
 			free(numbers_char[x]);
 			x++;
 		}
@@ -93,7 +102,6 @@ t_map	*parse_file(char *filename)
 	t_map	*map;
 
 	lines = read_file(filename);
-	printf("File read\n");
 	map = malloc(sizeof(*map));
 	if (!map)
 	{
@@ -102,6 +110,10 @@ t_map	*parse_file(char *filename)
 	}
 	map->x_len = get_x_len(lines);
 	map->y_len = get_y_len(lines);
+	if (WIN_WIDTH / map->x_len > WIN_HEIGHT / map->y_len)
+		map->offset = (double) WIN_HEIGHT / (double) map->y_len;
+	else
+		map->offset = (double) WIN_WIDTH / (double) map->x_len;
 	map->map = malloc(map->y_len * sizeof(*map->map));
 	if (!map->map)
 	{
@@ -109,10 +121,8 @@ t_map	*parse_file(char *filename)
 		ft_lstclear(&lines, &free);
 		exit(error("Error: Malloc allocation error during parsing", 1));
 	}
-	printf("Map malloc\n");
 	if (fill_map(map, lines) != 1)
 		return (NULL);
-	printf("Map filled\n");
 	ft_lstclear(&lines, &free);
 	ft_printf("Parsing done\n");
 	return (map);

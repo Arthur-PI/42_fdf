@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:12:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/11 12:11:47 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/11 19:16:12 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,6 @@ static void	init_mlx(t_mlx *mlx)
 		free_map(&mlx->map);
 		exit(error("Can't create an mlx window", 1));
 	}
-	mlx->map->zoom = 1;
-	mlx->map->trans.tx = 0;
-	mlx->map->trans.ty = 0;
-	mlx->map->rot.rx = 0;
-	mlx->map->rot.ry = 0;
-	mlx->map->rot.rz = 0;
-	if (WIN_WIDTH / mlx->map->x_len > WIN_HEIGHT / mlx->map->y_len)
-		mlx->map->offset = WIN_HEIGHT / mlx->map->y_len;
-	else
-		mlx->map->offset = WIN_WIDTH / mlx->map->x_len;
 }
 
 static void	usage(char *name)
@@ -58,26 +48,26 @@ static void	usage(char *name)
 	exit(1);
 }
 
-/*
-static void	print_map(t_map *map)
+void	print_map(t_map *map)
 {
 	int	x;
 	int	y;
 
 	y = 0;
+	printf("\nMap: \n");
 	while (y < map->y_len)
 	{
 		x = 0;
 		while (x < map->x_len)
 		{
-			printf("%3d", map->map[y][x].z);
+			//printf("(%.2f,%.2f,%.2f) ", map->map[y][x].x, map->map[y][x].y, map->map[y][x].z);
+			printf("(%3.2f) ", map->map[y][x].y);
 			x++;
 		}
 		printf("\n");
 		y++;
 	}
 }
-*/
 
 void	draw_map(t_mlx *mlx)
 {
@@ -87,6 +77,7 @@ void	draw_map(t_mlx *mlx)
 
 	y = 0;
 	map = mlx->map->map;
+	//print_map(mlx->map);
 	while (y < mlx->map->y_len)
 	{
 		x = 0;
@@ -121,6 +112,20 @@ t_img	get_image(t_mlx *mlx)
 	return (img);
 }
 
+void	iso_view(t_map *map)
+{
+	foreach_point(map, -(WIN_WIDTH / 2), &translate_x);
+	foreach_point(map, -(WIN_HEIGHT / 2), &translate_y);
+	foreach_point(map, 0.7, &zoom);
+}
+
+void	render(t_mlx *mlx)
+{
+	ft_bzero(mlx->img->addr, sizeof(int) * WIN_WIDTH * WIN_HEIGHT);
+	draw_map(mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->img, 0, 0);
+}
+
 // The mlx, the window and the image malloc 232 times
 int	main(int ac, char **av)
 {
@@ -135,8 +140,8 @@ int	main(int ac, char **av)
 	init_mlx(&mlx);
 	img = get_image(&mlx);
 	mlx.img = &img;
-	draw_map(&mlx);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img->img, 0, 0);
+	iso_view(mlx.map);
+	render(&mlx);
 	setup_hooks(&mlx);
 	mlx_loop(mlx.mlx);
 	quit(&mlx);

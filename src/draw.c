@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:59:21 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/10 22:58:48 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/11 17:21:13 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,50 +56,11 @@ static void	bresenham(t_img *img, t_point a, t_point b, int *signs)
 	}
 }
 
-void	offset(t_point *p, int offset)
+static int	line_in_window(t_point x1, t_point x2)
 {
-	p->x = p->x * offset - WIN_WIDTH / 2;
-	p->y = p->y * offset - WIN_HEIGHT / 2;
-	p->z = p->z * 10;
-}
-
-void	apply_zoom(t_point *p, double zoom)
-{
-	p->x *= zoom;
-	p->y *= zoom;
-	p->z *= zoom;
-}
-
-void	translate(t_point *p, t_translate trans)
-{
-	p->x += trans.tx;
-	p->y += trans.ty;
-}
-
-int	get_r(int color)
-{
-	return ((color >> 16) & 0xFF);
-}
-
-int	get_g(int color)
-{
-	return ((color >> 8) & 0xFF);
-}
-
-int	get_b(int color)
-{
-	return (color & 0xFF);
-}
-
-int	blend_colors(int c1, int c2)
-{
-	int cnew;
-
-	cnew = 0;
-	cnew = ((get_r(c1) + get_r(c2)) / 2) << 8;
-	cnew = (cnew + ((get_g(c1) + get_g(c2)) / 2)) << 8;
-	cnew += (get_b(c1) + get_b(c2)) / 2;
-	return (cnew);
+	(void)x1;
+	(void)x2;
+	return (TRUE);
 }
 
 void	draw_line(t_mlx *mlx, t_point x1, t_point x2)
@@ -110,14 +71,6 @@ void	draw_line(t_mlx *mlx, t_point x1, t_point x2)
 
 	a = copy_point(x1);
 	b = copy_point(x2);
-	offset(&a, mlx->img->offset);
-	offset(&b, mlx->img->offset);
-	rotate_point(&a, mlx->map->rot);
-	rotate_point(&b, mlx->map->rot);
-	apply_zoom(&a, mlx->map->zoom);
-	apply_zoom(&b, mlx->map->zoom);
-	translate(&a, mlx->map->trans);
-	translate(&b, mlx->map->trans);
 	signs[0] = UP;
 	signs[1] = UP;
 	if (a.x > b.x)
@@ -125,5 +78,6 @@ void	draw_line(t_mlx *mlx, t_point x1, t_point x2)
 	if (a.y > b.y)
 		signs[1] = DOWN;
 	a.color = blend_colors(a.color, b.color);
-	bresenham(mlx->img, a, b, signs);
+	if (line_in_window(a, b))
+		bresenham(mlx->img, a, b, signs);
 }
