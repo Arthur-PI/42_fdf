@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:59:21 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 11:50:37 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/12 16:06:28 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	bresenham(t_img *img, t_point2d a, t_point2d b, int *signs)
 	int	p;
 	int	p2;
 
-	dx = ABS(b.x - a.x);
-	dy = -ABS(b.y - a.y);
+	dx = ft_abs(b.x - a.x);
+	dy = -ft_abs(b.y - a.y);
 	p = dx + dy;
 	while (1)
 	{
@@ -58,10 +58,10 @@ static void	bresenham(t_img *img, t_point2d a, t_point2d b, int *signs)
 
 static int	line_in_window(t_point2d x1, t_point2d x2)
 {
-	int right_border;
-	int left_border;
-	int top_border;
-	int bottom_border;
+	int	right_border;
+	int	left_border;
+	int	top_border;
+	int	bottom_border;
 
 	right_border = 0 - WIN_WIDTH / 2;
 	left_border = WIN_WIDTH / 2;

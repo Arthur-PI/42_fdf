@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 11:57:55 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 13:22:32 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/12 16:06:17 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,6 @@ static int	get_y_len(t_list *lst)
 	return (i);
 }
 
-static int	emergency_fill_problem(t_map *map)
-{
-	int	y;
-
-	y = 0;
-	while (map->map[y])
-		free(map->map[y++]);
-	return (ERROR);
-}
-
 static int	fill_map(t_map *map, t_list *lines)
 {
 	int		x;
@@ -78,8 +68,8 @@ static int	fill_map(t_map *map, t_list *lines)
 		{
 			z = ft_atoi(numbers_char[x]);
 			map->map[y][x] = get_map_point(get_point(x, y, z, 0), map);
-			map->z_range[0] = MIN(map->z_range[0], map->map[y][x].z);
-			map->z_range[1] = MAX(map->z_range[1], map->map[y][x].z);
+			map->z_range[0] = ft_min(map->z_range[0], map->map[y][x].z);
+			map->z_range[1] = ft_max(map->z_range[1], map->map[y][x].z);
 			free(numbers_char[x]);
 			x++;
 		}
@@ -105,7 +95,7 @@ t_map	*init_map(t_list *lines)
 		map->offset = (double) WIN_HEIGHT / (double) map->y_len;
 	else
 		map->offset = (double) WIN_WIDTH / (double) map->x_len;
-	map->offsetZ = map->offset / 4;
+	map->offset_z = map->offset / 4;
 	map->map = malloc(map->y_len * sizeof(*map->map));
 	if (!map->map || fill_map(map, lines) == ERROR)
 	{
@@ -114,28 +104,7 @@ t_map	*init_map(t_list *lines)
 		free(map);
 		return (NULL);
 	}
-	return map;
-}
-
-void	set_map_color(t_map *map)
-{
-	int		x;
-	int		y;
-	t_point	*p;
-
-	y = 0;
-	while (y < map->y_len)
-	{
-		x = 0;
-		while (x < map->x_len)
-		{
-			p = &map->map[y][x];
-			p->color = generate_color(p->z, map->z_range[0], map->z_range[1]);
-			//printf("Z: %3d -> %x\n", (int)p->z, p->color);
-			x++;
-		}
-		y++;
-	}
+	return (map);
 }
 
 t_map	*parse_file(char *filename)
@@ -148,6 +117,5 @@ t_map	*parse_file(char *filename)
 	if (map)
 		set_map_color(map);
 	ft_lstclear(&lines, &free);
-	ft_printf("Parsing done\n");
 	return (map);
 }

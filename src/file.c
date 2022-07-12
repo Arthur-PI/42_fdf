@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:41:54 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/11 13:59:44 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/12 15:27:03 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,9 @@ static void	emergency_read_exit(t_list **lst, int fd)
 	exit(error("Error: malloc allocation error happened", 1));
 }
 
-t_list	*read_file(char *filename)
+static int	open_file(char *filename)
 {
-	int		fd;
-	char	*line;
-	t_list	*start;
-	t_list	*current;
+	int	fd;
 
 	valid_filename(filename);
 	fd = open(filename, O_RDONLY);
@@ -45,6 +42,17 @@ t_list	*read_file(char *filename)
 		close(fd);
 		exit(error("Error: can't open or read the file", 1));
 	}
+	return (fd);
+}
+
+t_list	*read_file(char *filename)
+{
+	int		fd;
+	char	*line;
+	t_list	*start;
+	t_list	*current;
+
+	fd = open_file(filename);
 	current = ft_lstnew(get_next_line(fd));
 	start = current;
 	while (current && current->content != NULL)

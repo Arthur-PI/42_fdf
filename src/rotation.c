@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 09:38:45 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 10:08:11 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/12 16:00:12 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	rotate_map(t_map *map, double angle, int axis)
 	cos_sin[0] = cos(angle);
 	cos_sin[1] = sin(angle);
 	if (axis == X_AXIS)
-		foreach(map, cos_sin, &rotate_x);
-	else if (axis == Y_AXIS)	
-		foreach(map, cos_sin, &rotate_y);
+		each(map, cos_sin, &rotate_x);
+	else if (axis == Y_AXIS)
+		each(map, cos_sin, &rotate_y);
 	else if (axis == Z_AXIS)
-		foreach(map, cos_sin, &rotate_z);
+		each(map, cos_sin, &rotate_z);
 }

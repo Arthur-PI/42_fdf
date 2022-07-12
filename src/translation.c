@@ -6,13 +6,13 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 15:56:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 10:08:26 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/12 15:59:58 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	foreach(t_map *map, double *v, void (*f)(t_point *, double, double))
+void	each(t_map *map, double *v, void (*f)(t_point *, double, double))
 {
 	int	y;
 	int	x;
@@ -42,7 +42,7 @@ void	translate_map(t_map *map, double tx, double ty)
 
 	trans[0] = tx;
 	trans[1] = ty;
-	foreach(map, trans, &translate);
+	each(map, trans, &translate);
 }
 
 static void	zoom(t_point *p, double coef, double vide)
@@ -59,5 +59,5 @@ void	zoom_map(t_map *map, double coef)
 
 	val[0] = coef;
 	val[1] = 0;
-	foreach(map, val, &zoom);
+	each(map, val, &zoom);
 }

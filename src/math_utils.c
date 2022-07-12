@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/30 19:21:24 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 15:19:20 by apigeon          ###   ########.fr       */
+/*   Created: 2022/07/12 16:00:29 by apigeon           #+#    #+#             */
+/*   Updated: 2022/07/12 16:05:40 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-
-int	error(char	*message, int code)
+int	ft_abs(int x)
 {
-	ft_printf("Error: %s\n", message);
-	return (code);
+	if (x < 0)
+		return (-x);
+	return (x);
 }
 
-int	emergency_fill_problem(t_map *map)
+int	ft_min(int a, int b)
 {
-	int	y;
+	if (a < b)
+		return (a);
+	return (b);
+}
 
-	y = 0;
-	while (map->map[y])
-		free(map->map[y++]);
-	return (ERROR);
+int	ft_max(int a, int b)
+{
+	if (a < b)
+		return (b);
+	return (a);
 }

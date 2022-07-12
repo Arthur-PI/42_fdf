@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:54:46 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 13:30:18 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/12 16:12:47 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@
 # define MOUSE_SCROLL_DOWN 5
 
 # define MASK_NO_EVENT 0L
-# define MASK_KEY_PRESS 1L << 0
+# define MASK_KEY_PRESS 1L
 
-# define TRANSLATION_SPEED 30
+# define TRANSLATION_SPEED 20
 # define ZOOM_SPEED 0.05
-# define ROTATION_SPEED M_PI_4 / 15.0f
+# define ROTATION_SPEED 0.1
 
 # ifndef BOOL_H
 #  define TRUE 1

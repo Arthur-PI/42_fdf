@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 17:11:44 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 13:22:26 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/12 15:29:21 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static double	get_b(int color)
 
 int	blend_colors(int c1, int c2, double coef)
 {
-	int 	cnew;
+	int		cnew;
 	double	icoef;
 
 	icoef = 1 - coef;
@@ -44,17 +44,20 @@ int	generate_color(int z, int min_z, int max_z)
 {
 	int	x;
 	int	color;
-	int	colors[6];
+	int	c[6];
 
-	colors[0] = COLOR_1;
-	colors[1] = COLOR_2;
-	colors[2] = COLOR_3;
-	colors[3] = COLOR_4;
-	colors[4] = COLOR_5;
-	colors[5] = COLOR_5;
-
+	c[0] = COLOR_1;
+	c[1] = COLOR_2;
+	c[2] = COLOR_3;
+	c[3] = COLOR_4;
+	c[4] = COLOR_5;
+	c[5] = COLOR_5;
+	if (min_z < 0)
+		z -= min_z;
 	x = (max_z - min_z) / 5;
+	if (x == 0)
+		return (c[3]);
 	color = z / x;
-	color = blend_colors(colors[color], colors[color + 1], 1 - ((double)(z % x) / x));
+	color = blend_colors(c[color], c[color + 1], 1 - ((double)(z % x) / x));
 	return (color);
 }
