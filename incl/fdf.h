@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/11 19:05:07 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/12 12:50:41 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@
 # include "constant.h"
 
 # include <stdio.h>
-# include <string.h>
 
 # define ABS(X) (((X) < 0) ? (-(X)) : (X))
+
+# define MIN(X,Y) (((X) < (Y)) ? (X) : (Y))
+# define MAX(X,Y) (((X) < (Y)) ? (Y) : (X))
 
 typedef struct s_img
 {
@@ -47,11 +49,20 @@ typedef struct s_point
 	int	color;
 }               t_point;
 
+typedef struct s_point2d
+{
+    int x;
+    int y;
+	int	color;
+}               t_point2d;
+
 typedef struct  s_map
 {
     int         x_len;
     int         y_len;
+    int         z_range[2];
 	double	    offset;
+	double	    offsetZ;
     t_point     **map;
 }               t_map;
 
@@ -68,20 +79,22 @@ void    setup_hooks(t_mlx *mlx);
 t_map   *parse_file(char *filename);
 t_list	*read_file(char *filename);
 void	draw_line(t_mlx *mlx, t_point a, t_point b);
-t_point get_point(int x, int y, int z, int color);
+t_point get_point(double x, double y, double z, int color);
 t_point copy_point(t_point p);
 void    draw_map(t_mlx *mlx);
 t_img   get_image(t_mlx *mlx);
-t_point get_map_point(t_point p, double offset);
-void	foreach_point(t_map *map, double val, void (*f)(t_point *, double));
-void	translate_x(t_point *p, double tx);
-void	translate_y(t_point *p, double ty);
-void	rotate_x(t_point *p, double rx);
-void	rotate_y(t_point *p, double ry);
-void	rotate_z(t_point *p, double rz);
-void    zoom(t_point *p, double coef);
-int     blend_colors(int c1, int c2);
+t_point get_map_point(t_point p, t_map *map);
+
+void	foreach(t_map *map, double *v, void (*f)(t_point *, double, double));
+
+void	translate_map(t_map *map, double tx, double ty);
+void	rotate_map(t_map *map, double angle, int axis);
+void	zoom_map(t_map *map, double coef);
+
+int     generate_color(int z, int min_z, int max_z);
 void    print_map(t_map *map);
+int	    blend_colors(int c1, int c2, double coef);
 void    render(t_mlx *mlx);
+t_point2d   get_point2d(t_point p);
 
 #endif

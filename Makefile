@@ -6,13 +6,13 @@
 #    By: apigeon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/30 16:08:04 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/11 17:13:45 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/12 12:57:02 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 ### COMPILATION ###
-CC		= cc
+CC		= cc #-Ofast
 CFLAGS	= -Wall -Werror -Wextra -g3
 LFLAGS	= -L$(LIBFT_DIR) -L$(MLX_DIR)
 LINKS	= -lft -lmlx -lX11 -lXext -lm
@@ -39,7 +39,8 @@ SRCS	= 	main.c \
 			draw.c \
 			point.c \
 			translation.c \
-			colors.c
+			colors.c \
+			rotation.c
 
 ### OBJECTS ###
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))

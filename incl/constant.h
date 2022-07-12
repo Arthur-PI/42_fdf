@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:54:46 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/11 16:07:45 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/12 13:30:18 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@
 
 # define UP 1
 # define DOWN -1
+
+# define X_AXIS 1
+# define Y_AXIS 2
+# define Z_AXIS 3
+
+# define ERROR 1
+# define NO_ERROR 0
+
+# define COLOR_1 0x000A46D1
+# define COLOR_2 0x004DE94C
+# define COLOR_3 0x00FFEE00
+# define COLOR_4 0x00FF8C00
+# define COLOR_5 0x00F60000
 
 # define ON_KEYDOWN 2
 # define ON_KEYUP 3
@@ -61,7 +74,7 @@
 
 # define TRANSLATION_SPEED 30
 # define ZOOM_SPEED 0.05
-# define ROTATION_SPEED M_PI_4 / 10.0
+# define ROTATION_SPEED M_PI_4 / 15.0f
 
 # ifndef BOOL_H
 #  define TRUE 1

@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:12:22 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/11 19:16:12 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/12 12:56:44 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	print_map(t_map *map)
 		while (x < map->x_len)
 		{
 			//printf("(%.2f,%.2f,%.2f) ", map->map[y][x].x, map->map[y][x].y, map->map[y][x].z);
-			printf("(%3.2f) ", map->map[y][x].y);
+			printf("(%x) ", map->map[y][x].color);
 			x++;
 		}
 		printf("\n");
@@ -114,9 +114,8 @@ t_img	get_image(t_mlx *mlx)
 
 void	iso_view(t_map *map)
 {
-	foreach_point(map, -(WIN_WIDTH / 2), &translate_x);
-	foreach_point(map, -(WIN_HEIGHT / 2), &translate_y);
-	foreach_point(map, 0.7, &zoom);
+	translate_map(map, -(WIN_WIDTH / 2), -(WIN_HEIGHT / 2));
+	zoom_map(map, 0.7);
 }
 
 void	render(t_mlx *mlx)

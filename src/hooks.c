@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 22:37:45 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/11 19:04:23 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/12 10:43:10 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,37 @@ static int	stop_loop(t_mlx *mlx)
 static void	handle_zoom_keys(int keycode, t_mlx *mlx)
 {
 	if (keycode == KEY_PLUS)
-		foreach_point(mlx->map, 1 + ZOOM_SPEED, &zoom);
+		zoom_map(mlx->map, 1 + ZOOM_SPEED);
 	else if (keycode == KEY_MINUS)
-		foreach_point(mlx->map, 1 - ZOOM_SPEED, &zoom);
+		zoom_map(mlx->map, 1 - ZOOM_SPEED);
 }
 
 static void handle_translation_keys(int keycode, t_mlx *mlx)
 {
 	if (keycode == KEY_W || keycode == KEY_ARROW_UP)
-		foreach_point(mlx->map, -TRANSLATION_SPEED, &translate_y);
+		translate_map(mlx->map, 0, TRANSLATION_SPEED);
 	else if (keycode == KEY_S || keycode == KEY_ARROW_DOWN)
-		foreach_point(mlx->map, TRANSLATION_SPEED, &translate_y);
+		translate_map(mlx->map, 0, -TRANSLATION_SPEED);
 	else if (keycode == KEY_A || keycode == KEY_ARROW_LEFT)
-		foreach_point(mlx->map, -TRANSLATION_SPEED, &translate_x);
+		translate_map(mlx->map, TRANSLATION_SPEED, 0);
 	else if (keycode == KEY_D || keycode == KEY_ARROW_RIGHT)
-		foreach_point(mlx->map, TRANSLATION_SPEED, &translate_x);
+		translate_map(mlx->map, -TRANSLATION_SPEED, 0);
 }
 
 static void	handle_rotation_keys(int keycode, t_mlx *mlx)
 {
-	double speed;
-
-	speed = ROTATION_SPEED;
 	if (keycode == KEY_O)
-		foreach_point(mlx->map, speed, &rotate_x);
+		rotate_map(mlx->map, ROTATION_SPEED, X_AXIS);
 	else if (keycode == KEY_P)
-		foreach_point(mlx->map, -speed, &rotate_x);
+		rotate_map(mlx->map, -ROTATION_SPEED, X_AXIS);
 	else if (keycode == KEY_L)
-		foreach_point(mlx->map, speed, &rotate_y);
+		rotate_map(mlx->map, ROTATION_SPEED, Y_AXIS);
 	else if (keycode == KEY_K)
-		foreach_point(mlx->map, -speed, &rotate_y);
+		rotate_map(mlx->map, -ROTATION_SPEED, Y_AXIS);
 	else if (keycode == KEY_M)
-		foreach_point(mlx->map, speed, &rotate_z);
+		rotate_map(mlx->map, ROTATION_SPEED, Z_AXIS);
 	else if (keycode == KEY_N)
-		foreach_point(mlx->map, -speed, &rotate_z);
+		rotate_map(mlx->map, -ROTATION_SPEED, Z_AXIS);
 }
 
 static int	key_hook(int keycode, t_mlx *mlx)
