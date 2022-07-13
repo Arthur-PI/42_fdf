@@ -6,13 +6,13 @@
 #    By: apigeon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/30 16:08:04 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/12 16:03:12 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/13 21:28:36 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 ### COMPILATION ###
-CC		= cc -Ofast
+CC		= cc #-Ofast
 CFLAGS	= -Wall -Werror -Wextra -g3
 LFLAGS	= -L$(LIBFT_DIR) -L$(MLX_DIR)
 LINKS	= -lft -lmlx -lX11 -lXext -lm
@@ -45,7 +45,8 @@ SRCS	= 	main.c \
 			mlx_utils.c \
 			map_utils.c \
 			key_handler.c \
-			math_utils.c
+			math_utils.c \
+			views.c
 
 ### OBJECTS ###
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))

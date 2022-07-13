@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:41:54 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/13 09:32:40 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/13 22:06:57 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ static int	valid_filename(char *filename)
 	return (1);
 }
 
-static void	emergency_read_exit(t_list **lst, int fd)
-{
-	ft_lstclear(lst, &free);
-	close(fd);
-	exit(error("malloc allocation error happened", 1));
-}
-
 static int	open_file(char *filename)
 {
 	int	fd;
@@ -45,25 +38,58 @@ static int	open_file(char *filename)
 	return (fd);
 }
 
+static char	**read_line(int fd)
+{
+	char	*line;
+	char	**line_split;
+
+	line = get_next_line(fd);
+	if (!line)
+		return ((void *)FILE_OVER);
+	line_split = ft_split(line, ' ');
+	free(line);
+	return (line_split);
+}
+
+void	free_split(void *data)
+{
+	int		i;
+	char	**splits;
+
+	splits = data;
+	if (splits)
+	{
+		i = 0;
+		while (splits[i])
+			free(splits[i++]);
+		free(splits);
+	}
+}
+
 t_list	*read_file(char *filename)
 {
 	int		fd;
-	char	*line;
+	char	**line_split;
 	t_list	*start;
 	t_list	*current;
 
 	fd = open_file(filename);
-	current = ft_lstnew(get_next_line(fd));
+	line_split = read_line(fd);
+	if (!line_split)
+		return (NULL);
+	current = ft_lstnew(line_split);
 	start = current;
 	while (current && current->content != NULL)
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
-		ft_lstadd_back(&current, ft_lstnew(line));
-		if (!current->next)
+		line_split = read_line(fd);
+		if (!line_split)
 			emergency_read_exit(&start, fd);
+		if (line_split == (void *)FILE_OVER)
+			break ;
+		ft_lstadd_back(&current, ft_lstnew(line_split));
 		current = current->next;
+		if (!current)
+			emergency_read_exit(&start, fd);
 	}
 	close(fd);
 	return (start);

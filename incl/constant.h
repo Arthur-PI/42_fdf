@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:54:46 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/13 09:45:54 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/13 21:52:45 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 # define UP 1
 # define DOWN -1
+
+# define FILE_OVER -1
 
 # define X_AXIS 1
 # define Y_AXIS 2
@@ -47,6 +49,8 @@
 # define KEY_L 108
 # define KEY_N 110
 # define KEY_M 109
+# define KEY_1 49
+# define KEY_2 50
 # define KEY_PLUS 61
 # define KEY_MINUS 45
 # define KEY_ARROW_UP 65362

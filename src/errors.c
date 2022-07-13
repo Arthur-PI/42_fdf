@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 19:21:24 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 15:19:20 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/13 22:09:16 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,9 @@ int	error(char	*message, int code)
 	return (code);
 }
 
-int	emergency_fill_problem(t_map *map)
+void	emergency_read_exit(t_list **lst, int fd)
 {
-	int	y;
-
-	y = 0;
-	while (map->map[y])
-		free(map->map[y++]);
-	return (ERROR);
+	ft_lstclear(lst, &free_split);
+	close(fd);
+	exit(error("malloc allocation error happened during file read", 1));
 }

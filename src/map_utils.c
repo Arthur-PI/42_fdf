@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:18:29 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 15:39:03 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/13 22:10:30 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,55 @@ void	set_map_color(t_map *map)
 		}
 		y++;
 	}
+}
+
+t_point	**copy_map(t_point **new_map, t_point **map, int x_len, int y_len)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < y_len)
+	{
+		x = 0;
+		while (x < x_len)
+		{
+			new_map[y][x] = map[y][x];
+			x++;
+		}
+		y++;
+	}
+	return (new_map);
+}
+
+void	free_map_points(t_point **map, int y_len)
+{
+	int	y;
+
+	y = 0;
+	while (y < y_len)
+		free(map[y++]);
+	free(map);
+}
+
+t_point	**malloc_map(int x_len, int y_len)
+{
+	int		y;
+	t_point	**map;
+
+	map = malloc(y_len * sizeof(*map));
+	if (!map)
+		return (NULL);
+	y = 0;
+	while (y < y_len)
+	{
+		map[y] = malloc(x_len * sizeof(*map[y]));
+		if (!map[y])
+		{
+			free_map_points(map, y_len);
+			return (NULL);
+		}
+		y++;
+	}
+	return (map);
 }

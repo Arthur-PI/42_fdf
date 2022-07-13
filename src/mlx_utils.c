@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:14:40 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 15:38:33 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/13 21:07:13 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	init_mlx(t_mlx *mlx)
 {
 	mlx->mlx = mlx_init();
+	mlx->img = NULL;
 	if (!mlx->mlx)
 	{
 		free_map(&mlx->map);
@@ -28,27 +29,31 @@ void	init_mlx(t_mlx *mlx)
 	}
 }
 
-t_img	get_image(t_mlx *mlx)
+t_img	*get_image(t_mlx *mlx)
 {
-	t_img	img;
+	t_img	*img;
 
-	img.img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
-			&img.line_length, &img.endian);
-	img.offset = mlx->map->offset;
+	img = malloc(sizeof(*img));
+	if (!img)
+		return (NULL);
+	img->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
 	return (img);
+}
+
+void	free_image(t_mlx *mlx, t_img *img)
+{
+	if (img)
+	{
+		mlx_destroy_image(mlx->mlx, img->img);
+		free(img);
+	}
 }
 
 void	free_map(t_map **map)
 {
-	int	y;
-
-	y = 0;
-	while (y < (*map)->y_len)
-	{
-		free((*map)->map[y]);
-		y++;
-	}
-	free((*map)->map);
+	free_map_points((*map)->map, (*map)->y_len);
+	free_map_points((*map)->map_copy, (*map)->y_len);
 	free(*map);
 }

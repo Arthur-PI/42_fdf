@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:34:32 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 15:40:11 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/13 21:10:58 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,12 @@ void	handle_rotation_keys(int keycode, t_mlx *mlx)
 		rotate_map(mlx->map, ROTATION_SPEED, Z_AXIS);
 	else if (keycode == KEY_N)
 		rotate_map(mlx->map, -ROTATION_SPEED, Z_AXIS);
+}
+
+void	handle_view_keys(int keycode, t_mlx *mlx)
+{
+	if (keycode == KEY_1)
+		iso_view(mlx->map);
+	else if (keycode == KEY_2)
+		para_view(mlx->map);
 }
