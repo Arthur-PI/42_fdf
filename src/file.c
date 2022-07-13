@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:41:54 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 15:27:03 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/13 09:32:40 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int	valid_filename(char *filename)
 
 	len = ft_strlen(filename);
 	if (len < 5)
-		exit(error("Error: wrong filename extension", 1));
+		exit(error("wrong filename extension", 1));
 	if (ft_strncmp(filename + (len - 4), ".fdf", 4) != 0)
-		exit(error("Error: wrong filename extension", 1));
+		exit(error("wrong filename extension", 1));
 	return (1);
 }
 
@@ -28,7 +28,7 @@ static void	emergency_read_exit(t_list **lst, int fd)
 {
 	ft_lstclear(lst, &free);
 	close(fd);
-	exit(error("Error: malloc allocation error happened", 1));
+	exit(error("malloc allocation error happened", 1));
 }
 
 static int	open_file(char *filename)
@@ -40,7 +40,7 @@ static int	open_file(char *filename)
 	if (fd == -1 || read(fd, NULL, 0) == -1)
 	{
 		close(fd);
-		exit(error("Error: can't open or read the file", 1));
+		exit(error("can't open or read the file", 1));
 	}
 	return (fd);
 }

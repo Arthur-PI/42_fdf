@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:54:46 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 16:12:47 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/13 08:43:05 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@
 # define WIN_HEIGHT 900
 # define WIN_WIDTH 1200
 # define WIN_TITLE "FDF"
-
-# define RED 0x00FF0000
-# define GREEN 0x0000FF00
-# define BLUE 0x000000FF
 
 # define UP 1
 # define DOWN -1
@@ -38,11 +34,6 @@
 # define COLOR_5 0x00F60000
 
 # define ON_KEYDOWN 2
-# define ON_KEYUP 3
-# define ON_MOUSEDOWN 4
-# define ON_MOUSEUP 5
-# define ON_MOUSEMOVE 6
-# define ON_EXPOSE 12
 # define ON_DESTROY 17
 
 # define KEY_ESC 65307
@@ -63,9 +54,6 @@
 # define KEY_ARROW_LEFT 65361
 # define KEY_ARROW_RIGHT 65363
 
-# define MOUSE_CLICK 1
-# define MOUSE_MIDDLE_CLICK 2
-# define MOUSE_RIGHT_CLICK 3
 # define MOUSE_SCROLL_UP 4
 # define MOUSE_SCROLL_DOWN 5
 
