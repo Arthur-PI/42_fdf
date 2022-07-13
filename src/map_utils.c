@@ -6,11 +6,29 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 15:18:29 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/13 22:10:30 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/13 22:18:56 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	each(t_map *map, double *v, void (*f)(t_point *, double, double))
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < map->y_len)
+	{
+		x = 0;
+		while (x < map->x_len)
+		{
+			f(&map->map[y][x], v[0], v[1]);
+			x++;
+		}
+		y++;
+	}
+}
 
 void	set_map_color(t_map *map)
 {

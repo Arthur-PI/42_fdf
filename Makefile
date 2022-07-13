@@ -6,14 +6,14 @@
 #    By: apigeon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/30 16:08:04 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/13 21:28:36 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/13 22:32:40 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 ### COMPILATION ###
-CC		= cc #-Ofast
-CFLAGS	= -Wall -Werror -Wextra -g3
+CC		= cc -Ofast
+CFLAGS	= -Wall -Werror -Wextra
 LFLAGS	= -L$(LIBFT_DIR) -L$(MLX_DIR)
 LINKS	= -lft -lmlx -lX11 -lXext -lm
 
@@ -32,21 +32,21 @@ MLX			= $(MLX_DIR)/libmlx.a
 
 ### SOURCE FILES ###
 SRCS	= 	main.c \
-			errors.c \
-			hooks.c \
 			parse.c \
 			file.c \
+			hooks.c \
+			key_handler.c \
 			draw.c \
-			point.c \
-			translation.c \
 			colors.c \
-			rotation.c \
 			render.c \
+			point.c \
+			translation_zoom.c \
+			rotation.c \
+			views.c \
 			mlx_utils.c \
 			map_utils.c \
-			key_handler.c \
 			math_utils.c \
-			views.c
+			errors.c
 
 ### OBJECTS ###
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))

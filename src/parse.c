@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 11:57:55 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/13 22:11:04 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/13 22:17:59 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	fill_map(t_map *map, t_list *lines)
 	return (NO_ERROR);
 }
 
-t_map	*init_map(t_list *lines)
+static t_map	*init_map(t_list *lines)
 {
 	t_map	*map;
 
