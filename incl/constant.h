@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:54:46 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/13 08:43:05 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/13 09:45:54 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # define COLOR_4 0x00FF8C00
 # define COLOR_5 0x00F60000
 
-# define ON_KEYDOWN 2
 # define ON_DESTROY 17
+# define ON_KEYDOWN 2
 
 # define KEY_ESC 65307
 # define KEY_W 119
@@ -54,8 +54,8 @@
 # define KEY_ARROW_LEFT 65361
 # define KEY_ARROW_RIGHT 65363
 
-# define MOUSE_SCROLL_UP 4
-# define MOUSE_SCROLL_DOWN 5
+# define MOUSE_SCROLL_UP 5
+# define MOUSE_SCROLL_DOWN 4
 
 # define MASK_NO_EVENT 0L
 # define MASK_KEY_PRESS 1L

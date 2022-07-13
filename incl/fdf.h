@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 16:14:20 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/12 16:05:58 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/13 09:40:09 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include "libft.h"
 # include "mlx.h"
 # include "constant.h"
+
+# include <stdio.h>
 
 typedef struct s_img
 {
