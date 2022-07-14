@@ -6,20 +6,20 @@
 #    By: apigeon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/30 16:08:04 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/13 22:32:40 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/14 11:45:38 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 ### COMPILATION ###
 CC		= cc -Ofast
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -g3
 LFLAGS	= -L$(LIBFT_DIR) -L$(MLX_DIR)
 LINKS	= -lft -lmlx -lX11 -lXext -lm
 
 ### EXECUTABLE ###
 NAME	= fdf
-MAP		= maps/42.fdf
+MAP		= maps/empty.fdf
 
 ### INCLUDES ###
 OBJ_DIR		= bin

@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/02 17:41:54 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/13 22:06:57 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/14 11:50:34 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_list	*read_file(char *filename)
 
 	fd = open_file(filename);
 	line_split = read_line(fd);
-	if (!line_split)
+	if (!line_split || line_split == (void *)FILE_OVER)
 		return (NULL);
 	current = ft_lstnew(line_split);
 	start = current;
