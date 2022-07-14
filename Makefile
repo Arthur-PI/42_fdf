@@ -6,7 +6,7 @@
 #    By: apigeon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/30 16:08:04 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/14 11:45:38 by apigeon          ###   ########.fr        #
+#    Updated: 2022/07/14 11:59:28 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LINKS	= -lft -lmlx -lX11 -lXext -lm
 
 ### EXECUTABLE ###
 NAME	= fdf
-MAP		= maps/empty.fdf
+MAP		= maps/42.fdf
 
 ### INCLUDES ###
 OBJ_DIR		= bin
