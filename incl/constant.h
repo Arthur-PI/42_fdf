@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:54:46 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/13 22:31:26 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/14 09:29:30 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 
 # define TRANSLATION_SPEED 20
 # define ZOOM_SPEED 0.05
-# define ROTATION_SPEED 0.1
+# define ROTATION_SPEED 0.10471975511966
 
 # ifndef BOOL_H
 #  define TRUE 1
