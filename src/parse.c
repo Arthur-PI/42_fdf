@@ -6,7 +6,7 @@
 /*   By: apigeon <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 11:57:55 by apigeon           #+#    #+#             */
-/*   Updated: 2022/07/13 22:17:59 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/07/14 11:50:52 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ t_map	*parse_file(char *filename)
 	t_map	*map;
 
 	lines = read_file(filename);
+	if (!lines)
+		return (NULL);
 	map = init_map(lines);
 	if (map)
 	{
