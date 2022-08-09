@@ -6,14 +6,14 @@
 #    By: apigeon <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/30 16:08:04 by apigeon           #+#    #+#              #
-#    Updated: 2022/07/14 11:59:28 by apigeon          ###   ########.fr        #
+#    Updated: 2022/08/09 20:59:18 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 ### COMPILATION ###
-CC		= cc -Ofast
-CFLAGS	= -Wall -Werror -Wextra -g3
+CC		= cc -O3
+CFLAGS	= -Wall -Werror -Wextra #-g3
 LFLAGS	= -L$(LIBFT_DIR) -L$(MLX_DIR)
 LINKS	= -lft -lmlx -lX11 -lXext -lm
 
